@@ -1,29 +1,33 @@
 ﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/Site.Master" CodeBehind="login.aspx.vb" Inherits="SegundoExamenCopia.login" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="d-flex align-items-center py-4 bg-body-tertiary">
-        <main class="form-signin w-100 m-auto">
-            <h1 class="h3 mb-3 fw-normal">Iniciar sesion</h1>
+        <div class="d-flex justify-content-center align-content-center vh-90">
+            <main class="card form-signin shadow-lg p-4 m-auto" style="max-width:300px; width:100%; border-radius: 2rem;">
+                <h1 class="h3 mb-3 fw-bold" style="font-family:'Times New Roman'; font-size:x-large; color: darkblue">Iniciar sesion</h1>
 
-            <div class="form-floating">
-                <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" TextMode="SingleLine" placeholder="Email"></asp:TextBox>
-                <label for="MainContent_txtEmail">Correo</label>
-            </div>
+                <div class="form-floating mb-3">
+                    <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" TextMode="SingleLine" placeholder="Email"></asp:TextBox>
+                    <label style="font-family:'Times New Roman'; font-size:larger; color: black" for="MainContent_txtEmail">Correo</label>
+                </div>
 
-            <div class="form-floating">
-                <asp:TextBox ID="txtPass" runat="server" CssClass="form-control" TextMode="Password" placeholder="Password"></asp:TextBox>
-                <label for="MainContent_txtPass">Clave</label>
-            </div>
+                <div class="form-floating mb-3">
+                    <asp:TextBox ID="txtPass" runat="server" CssClass="form-control" TextMode="Password" placeholder="Password"></asp:TextBox>
+                    <label style="font-family:'Times New Roman'; font-size:larger; color: black" for="MainContent_txtPass">Clave</label>
+                </div>
 
-            <div class="form-check text-start my-3">
-                <input class="form-check-input" type="checkbox" value="remember-me" id="flexCheckDefault">
-                <label class="form-check-label" for="flexCheckDefault">
-                    Recordarme
-                </label>
-            </div>
-            <asp:Button CssClass="btn btn-primary w-100 py-2" ID="btnLogin" runat="server" Text="Acceder" OnClick="btnLogin_Click" />
-        </main>
+                <div class="form-check text-start mb-3">
+                    <input class="form-check-input" type="checkbox" value="remember-me" id="flexCheckDefault">
+                    <label style="font-family:'Times New Roman'; font-size:larger; color: black" class="form-check-label" for="flexCheckDefault">
+                        Recordarme
+                    </label>
+                </div>
+                <asp:Button CssClass="btn btn-primary w-100 py-2" ID="btnLogin" runat="server" Text="Acceder" OnClick="btnLogin_Click" />
+            </main>
+        </div>
+    <div class="text-center mt-4" >
+        <a style="font-family:'Times New Roman'; font-size:x-large; color: indigo" href="Registro.aspx">¿Primera vez que ingresa?</a>
     </div>
-    <a href="Registro.aspx">¿Primera vez que ingresa?</a>
-    <asp:Label ID="lblError" runat="server" Text="" CssClass="alert alert-danger" Visible="false"></asp:Label>
+        
+        <asp:Label ID="lblError" runat="server" Text="" CssClass="alert alert-danger" Visible="false"></asp:Label>
+
 </asp:Content>

@@ -7,9 +7,7 @@
     Public Property Rol_ID As Integer
     Public Sub New()
     End Sub
-    Public Function Validar() As Boolean
-        Return Not String.IsNullOrEmpty(Correo) AndAlso Not String.IsNullOrEmpty(Contrasena)
-    End Function
+
     Public Function dtToUsuarios(dataTable As DataTable) As Usuarios
         If dataTable Is Nothing OrElse dataTable.Rows.Count = 0 Then
             Return Nothing

@@ -28,6 +28,20 @@ Public Class login
             Return Nothing
         End Try
     End Function
+    Protected Function ObtenerClientePorUsuarioID(usuarioID As Integer) As Clientes
+        Try
+            Dim helper As New DatabaseHelper()
+            Dim parametros As New List(Of SqlParameter) From {
+                New SqlParameter("@UsuarioID", usuarioID)
+            }
+            Dim query As String = "SELECT * FROM CLIENTES WHERE USUARIO_ID = @UsuarioID AND Activo = 1;"
+            Dim dataTable As DataTable = helper.ExecuteQuery(query, parametros)
+            Dim ClienteObj As New Clientes()
+            Return ClienteObj.dtToClientes(dataTable)
+        Catch ex As Exception
+            Return Nothing
+        End Try
+    End Function
     Protected Sub btnLogin_Click(sender As Object, e As EventArgs)
         Dim usuarioIn As New Usuarios() With {
             .Correo = txtEmail.Text,
@@ -35,18 +49,42 @@ Public Class login
         }
         Dim UsuarioCompleto As Usuarios = verificarUsuario(usuarioIn)
         If UsuarioCompleto IsNot Nothing Then
+            Dim cliente As Clientes = ObtenerClientePorUsuarioID(UsuarioCompleto.Id)
+            If cliente IsNot Nothing Then
+                Session("ClienteId") = cliente.ClienteId
+                Session("ClienteNombre") = cliente.Nombre
+            End If
             Select Case UsuarioCompleto.Rol_ID
                 Case 1 ' Administrador
-                    Response.Redirect("ClienteAdmin.aspx")
+                    ScriptManager.RegisterStartupScript(
+                Me, Me.GetType(),
+                "RegistrarUsuarioOk",
+                "Swal.fire('Acceso Exitoso').then((result) => {
+                If (result.isConfirmed)Then {
+                        window.location.href = 'ClienteAdmin.aspx';
+                    }
+                });",
+                True)
                 Case 2 ' Usuario normal
-                    Response.Redirect("ClienteUsuarioEstandar.aspx")
+                    ScriptManager.RegisterStartupScript(
+                Me, Me.GetType(),
+                "RegistrarUsuarioOk",
+                "Swal.fire('Acceso Exitoso').then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = 'ClienteUsuarioEstandar.aspx';
+                    }
+                });",
+                True)
                 Case Else
                     lblError.Text = "Rol de usuario no reconocido."
                     lblError.Visible = True
             End Select
-
-            lblError.Text = "Usuario o contraseña incorrectos."
-            lblError.Visible = True
+        Else
+            ScriptManager.RegisterStartupScript(
+                Me, Me.GetType(),
+                "RegistrarUsuarioError",
+                "Swal.fire('Usuario o contraseña incorrectos.');",
+                True)
         End If
     End Sub
 End Class

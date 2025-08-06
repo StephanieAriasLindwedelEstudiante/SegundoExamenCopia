@@ -145,7 +145,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
-    <Content Include="Images\Fondo.jpeg" />
+    <Content Include="Images\Fondo.jpg" />
     <Content Include="login.aspx" />
     <Content Include="Registro.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
